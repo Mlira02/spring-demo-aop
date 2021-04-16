@@ -5,6 +5,7 @@ import com.marcos.aopdemo.dao.MembershipDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.Member;
+import java.util.List;
 
 public class MainDemoApp
 {
@@ -14,18 +15,10 @@ public class MainDemoApp
                 new AnnotationConfigApplicationContext(DemoConfig.class);
 
         AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
-        MembershipDAO theMembershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
 
-        Account myAccount = new Account();
-
-        theAccountDAO.addAccount(myAccount);
-        theAccountDAO.setName("Marcos");
-        theAccountDAO.setServiceCode("silver");
-
-        String name = theAccountDAO.getName();
-        String serviceCode = theAccountDAO.getServiceCode();
-
-        theMembershipDAO.addMembership();
+        List<Account> theAccounts = theAccountDAO.findAccounts();
+        System.out.println("Main Program: DemoApp ");
+        System.out.println(theAccounts);
 
         context.close();
     }
