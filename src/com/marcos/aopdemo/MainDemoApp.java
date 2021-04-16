@@ -10,7 +10,6 @@ public class MainDemoApp
 {
     public static void main(String[] args)
     {
-        System.out.println("Does the aspect know before executing the main method???");
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(DemoConfig.class);
 
@@ -18,8 +17,14 @@ public class MainDemoApp
         MembershipDAO theMembershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
 
         Account myAccount = new Account();
+
         theAccountDAO.addAccount(myAccount);
-        System.out.println("\n let's call addMembership now \n");
+        theAccountDAO.setName("Marcos");
+        theAccountDAO.setServiceCode("silver");
+
+        String name = theAccountDAO.getName();
+        String serviceCode = theAccountDAO.getServiceCode();
+
         theMembershipDAO.addMembership();
 
         context.close();
