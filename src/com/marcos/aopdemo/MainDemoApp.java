@@ -15,8 +15,16 @@ public class MainDemoApp
                 new AnnotationConfigApplicationContext(DemoConfig.class);
 
         AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
-
-        List<Account> theAccounts = theAccountDAO.findAccounts();
+        List<Account> theAccounts = null;
+        try
+        {
+            boolean tripWire = true;
+            theAccounts = theAccountDAO.findAccounts(tripWire);
+        }
+        catch(Exception exc)
+        {
+            System.out.println("Main program caught exception: " + exc);
+        }
         System.out.println("Main Program: DemoApp ");
         System.out.println(theAccounts);
 
