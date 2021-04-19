@@ -93,7 +93,7 @@ public class MyDemoLoggingAspect
         catch(Exception exc)
         {
             myLogger.warning(exc.getMessage());
-            result = "Major accident! No worries this will be resolved soon!";
+            throw exc;
         }
         long end = System.currentTimeMillis();
         long duration = end - begin;
